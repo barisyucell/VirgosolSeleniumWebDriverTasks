@@ -18,19 +18,18 @@ public class Task3 {
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.get("https://selenium08.blogspot.com/2019/07/check-box-and-radio-buttons.html");
         driver.manage().window().maximize();
     }
 
     @AfterMethod
     public void tearDown() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         driver.close();
     }
 
     @Test
-    public void test1() {
-        driver.get("https://selenium08.blogspot.com/2019/07/check-box-and-radio-buttons.html");
-
+    public void test1() throws InterruptedException {
         WebElement redCheckBox = driver.findElement(By.xpath("//input[@value='red']"));
         WebElement greenCheckBox = driver.findElement(By.xpath("//input[@value='green']"));
         WebElement orangeCheckBox = driver.findElement(By.xpath("//input[@value='orange']"));
@@ -38,6 +37,7 @@ public class Task3 {
 
         // 2) Click red and green checkboxes:
         redCheckBox.click();
+        Thread.sleep(2000);
         greenCheckBox.click();
 
         // 3) Verify red is selected, orange is not selected:
@@ -48,9 +48,7 @@ public class Task3 {
     }
 
     @Test
-    public void test2() {
-        driver.get("https://selenium08.blogspot.com/2019/07/check-box-and-radio-buttons.html");
-
+    public void test2() throws InterruptedException {
         WebElement browserIE = driver.findElement(By.xpath("//input[@value='IE']"));
         WebElement browserMozilla = driver.findElement(By.xpath("//input[@value='Mozilla']"));
         WebElement browserOpera = driver.findElement(By.xpath("//input[@value='Opera']"));
@@ -58,14 +56,16 @@ public class Task3 {
         // 2) Click IE:
         browserIE.click();
 
+        Thread.sleep(2000);
+
         // 3) Verify IE is selected, Opera is not selected:
-        Assert.assertTrue(browserIE.isSelected() && !browserOpera.isSelected(), "Only one checkbox can be selected!");
+        Assert.assertTrue(browserIE.isSelected() && !browserOpera.isSelected());
 
         // 4) Click Mozilla:
         browserMozilla.click();
 
         // 5) Verify Mozilla is selected, IE is not selected:
-        Assert.assertTrue(browserMozilla.isSelected() && !browserIE.isSelected(), "Only one checkbox can be selected!");
+        Assert.assertTrue(browserMozilla.isSelected() && !browserIE.isSelected());
     }
 
 }
