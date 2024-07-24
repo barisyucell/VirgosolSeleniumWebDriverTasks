@@ -1,34 +1,12 @@
 package tasks2;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.concurrent.TimeUnit;
 
-public class Exercise {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @AfterMethod
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(2000);
-        driver.quit();
-    }
+public class Exercise extends BaseTest {
 
     @Test
     public void test() {
@@ -51,7 +29,6 @@ public class Exercise {
         try {
             driver.switchTo().alert().accept();
         } catch (Exception e) {
-
         }
 
         // 6) "Facility -> Honkong" seçilir:
@@ -83,7 +60,6 @@ public class Exercise {
         try {
             actualConfirmationMsg = driver.findElement(By.xpath("//h2")).getText();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualConfirmationMsg, expectedConfirmationMsg);
 
@@ -99,7 +75,6 @@ public class Exercise {
         try {
             actualUrl = driver.getCurrentUrl();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualUrl, expectedUrl);
 
@@ -109,29 +84,8 @@ public class Exercise {
         try {
             actualHeader = driver.findElement(By.xpath("//h3")).getText();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualHeader, expectedHeader);
     }
 
 }
-
-
-/*
-1)  Tarayıcı açılır (https://katalon-demo-cura.herokuapp.com)
-2)  "Make Appointment" butonuna tıklanır.
-3)  Kullanıcı adı ve şifre girilir (kullanıcı adı ve şifre "Demo account" alanından "get()" metodu kullanılarak alınıp girilir).
-4)  "Login" butonuna tıklanır.
-5)  "Şifrenizi değiştirin" popup'ı içerisindeki "Tamam" butonuna tıklanır.
-6)  "Facility -> Honkong" seçilir.
-7)  "Apply for hospital readmission" checkbox'ı seçilir.
-8)  "Healthcare Program Medicare" radiobutton'ı seçilir.
-9)  "Visit Date (Required)" alanına tarih girilir.
-10) "Comment" girilir.
-11) "Book Appointment" butonuna tıklanır.
-12) "Appointment Confirmation" yazısı kontrol edilir.
-13) Sağ üst köşedeki üç çizgi olan menü butonuna tıklanır.
-14) "Logout" butonuna tıklanır.
-15) Url kontrol edilir (https://katalon-demo-cura.herokuapp.com/)
-16) "We Care About Your Health" yazısı kontrol edilir.
-*/

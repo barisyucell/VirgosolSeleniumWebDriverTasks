@@ -1,38 +1,17 @@
 package tasks2;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
-public class WindowHandles {
+public class WindowHandles extends BaseTest {
 
-    WebDriver driver;
     JavascriptExecutor jse;
-
-    @BeforeMethod
-    public void setup() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    @AfterMethod
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(2000);
-        driver.quit();
-    }
 
     @Test
     public void test() {
@@ -47,7 +26,6 @@ public class WindowHandles {
         try {
             actualMainPageHeader = driver.findElement(By.xpath("//h1")).getText();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualMainPageHeader, expectedMainPageHeader);
 
@@ -75,7 +53,6 @@ public class WindowHandles {
         try {
             actualUrl = driver.switchTo().window(newTabWindowHandle).getCurrentUrl();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualUrl, expectedUrl);
 
@@ -85,7 +62,6 @@ public class WindowHandles {
         try {
             actualNewTabHeader = driver.findElement(By.xpath("//h1")).getText();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualNewTabHeader, expectedNewTabHeader);
 
@@ -105,7 +81,6 @@ public class WindowHandles {
         try {
             actualNewWindowHeader = driver.findElement(By.xpath("//h1")).getText();
         } catch (Exception e) {
-
         }
         Assert.assertEquals(actualNewWindowHeader, expectedNewWindowHeader);
 
@@ -114,15 +89,3 @@ public class WindowHandles {
     }
 
 }
-
-
-/*
-1) "https://demoqa.com/browser-windows" sayfasına gidilir.
-2) "Browser Windows" başlığı kontrol edilir (<h1>).
-3) "New Tab" butonuna tıklanır.
-4) Açılan sayfanın Url'i kontrol edilir (https://demoqa.com/sample)
-5) Açılan sayfadaki “This is a sample page” yazısı kontrol edilir.
-6) Ana sayfaya geçilip "New Window" butonuna tıklanır.
-7) Açılan penceredeki "This is a sample page" yazısı kontrol edilir.
-8) Açılan pencere kapatılır.
-*/
