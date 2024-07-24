@@ -1,0 +1,1 @@
+Virgosol, JCI İstanbul ve Yazılım Sanayicileri Derneği (YASAD) tarafından düzenlenen Test Otomasyon Bootcamp eğitimi Selenium WebDriver bölümünde verilen ödevler ve çözümleri.
